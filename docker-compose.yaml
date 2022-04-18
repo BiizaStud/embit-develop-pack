@@ -5,13 +5,24 @@ services:
     container_name: php-apache
     build:
       context: ./src
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-php
     depends_on:
       - db
     volumes:
-      - ./src/php:/var/www/html/
+      - ./src/embit-backend/embit-dev:/var/www/html/
     ports:
       - 80:80
+
+  composer:
+    container_name: composer
+    image: composer:latest
+    depends_on:
+      - php-apache-environment
+    volumes:
+      - ./src/embit-backend/embit-dev:/var/www/html/
+    command: >
+      sh -c "cd /var/www/html/ && echo test && ls -l && composer install"
+
   db:
     container_name: db
     image: mysql

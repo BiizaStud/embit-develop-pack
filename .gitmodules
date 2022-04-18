@@ -1,0 +1,3 @@
+[submodule "src/embit-backend"]
+	path = src/embit-backend
+	url = git@github.com:nzhukov/embit-backend.git
